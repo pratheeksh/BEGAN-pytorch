@@ -157,8 +157,8 @@ class Trainer(object):
             AE_G_d = self.D(sample_z_G.detach())
             AE_G_g = self.D(sample_z_G)
 
-            d_loss_real = l1(AE_x, x)
-            d_loss_fake = l1(AE_G_d, sample_z_G.detach())
+            d_loss_real = torch.mean(l1(AE_x, x))
+            d_loss_fake = torch.mean(l1(AE_G_d, sample_z_G.detach()))
 
             d_loss = d_loss_real - k_t * d_loss_fake
             g_loss = l1(sample_z_G, AE_G_g) # this won't still solve the problem
