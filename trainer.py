@@ -1,17 +1,22 @@
 from __future__ import print_function
 
 import os
-from collections import deque
-from glob import glob
-
 import StringIO
 import scipy.misc
+import numpy as np
+from glob import glob
+from tqdm import trange
+from itertools import chain
+from collections import deque
+
+import torch
+from torch import nn
 import torch.nn.parallel
 import torchvision.utils as vutils
-from tqdm import trange
+from torch.autograd import Variable
 
 from models import *
-
+from data_loader import get_loader
 
 def weights_init(m):
     classname = m.__class__.__name__
